@@ -1,0 +1,399 @@
+/* auth.css - Modern & Improved Sign-In Design */
+@import '../global.css';
+
+.sign-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  color: var(--text);
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+  font-family: var(--font-family-base);
+}
+
+.app.dark .sign-page {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.back-btn {
+  align-self: flex-start;
+  margin-bottom: var(--space-6);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-full);
+  color: var(--text);
+  background: var(--surface-secondary);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.back-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateX(-4px);
+}
+
+.sign-container {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6) 0;
+}
+
+.sign-card {
+  width: min(100%, 420px);
+  padding: var(--space-8);
+  background: var(--surface);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.sign-header {
+  margin-bottom: var(--space-8);
+  text-align: left;
+}
+
+.sign-header h1,
+.sign-header p {
+  margin: 0;
+}
+
+.sign-header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.sign-header p,
+.sign-toggle {
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.sign-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.input-group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.input-group label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+}
+
+.input-field {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-fast);
+  font-family: var(--font-family-base);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: var(--surface);
+}
+
+.input-field::placeholder {
+  color: var(--text-muted);
+}
+
+/* Password Field */
+.password-input-group {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  transition: color var(--transition-fast);
+}
+
+.password-input-group input {
+  padding-right: var(--space-10);
+}
+
+.password-toggle:hover {
+  color: var(--primary);
+}
+
+/* Helper Text */
+.input-helper {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+.input-error {
+  color: var(--danger);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Buttons */
+.sign-btn {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.sign-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.sign-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.sign-btn.secondary {
+  background: var(--surface-secondary);
+  color: var(--text);
+  box-shadow: none;
+  border: 1px solid var(--border);
+}
+
+.sign-btn.secondary:hover:not(:disabled) {
+  background: var(--border);
+  color: var(--primary);
+}
+
+/* Links */
+.sign-link {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-4);
+}
+
+.sign-link button {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.sign-link button:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Divider */
+.sign-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+}
+
+.sign-divider::before,
+.sign-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.sign-divider span {
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Social Buttons */
+.sign-social {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.sign-social button {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.sign-social button:hover {
+  background: var(--border);
+  color: var(--primary);
+}
+
+/* Toggle */
+.sign-toggle {
+  text-align: center;
+  margin-top: var(--space-4);
+}
+
+.sign-toggle button {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.sign-toggle button:hover {
+  color: var(--primary-dark);
+}
+
+/* OTP Input */
+.otp-inputs {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  margin: var(--space-6) 0;
+}
+
+.otp-input {
+  width: 50px;
+  height: 50px;
+  font-size: var(--font-size-xl);
+  text-align: center;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: var(--font-weight-bold);
+  transition: all var(--transition-fast);
+}
+
+.otp-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Alert */
+.alert {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-4);
+  border-left: 4px solid;
+}
+
+.alert.error {
+  background: #fee2e2;
+  border-left-color: var(--danger);
+  color: #991b1b;
+}
+
+.alert.success {
+  background: #dcfce7;
+  border-left-color: var(--success);
+  color: #166534;
+}
+
+.alert.info {
+  background: #dbeafe;
+  border-left-color: var(--info);
+  color: #0c4a6e;
+}
+
+/* Loading */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(99, 102, 241, 0.2);
+  border-top-color: var(--primary);
+  border-radius: var(--radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sign-page {
+    padding: var(--space-4);
+  }
+
+  .sign-card {
+    padding: var(--space-6);
+  }
+
+  .sign-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .sign-card {
+    padding: var(--space-4);
+  }
+
+  .sign-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .input-field {
+    font-size: 16px;
+  }
+}
+
+/* Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

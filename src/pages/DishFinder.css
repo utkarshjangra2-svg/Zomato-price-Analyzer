@@ -1,0 +1,1088 @@
+/* ─── Dish Finder Page ─────────────────────────────────────── */
+.dish-finder-page {
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--text);
+  padding-bottom: 80px;
+}
+
+.dish-finder-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Nav ─────────────────────────────────────────────────── */
+.df-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.df-nav h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.df-nav-eyebrow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7b6ef6;
+  margin-bottom: 2px;
+}
+
+.df-nav button {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.2s;
+}
+
+.df-nav button:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* ─── Hero ────────────────────────────────────────────────── */
+.df-hero {
+  text-align: center;
+  padding: 48px 0 32px;
+}
+
+.df-hero h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+
+.df-hero p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ─── Search Card ─────────────────────────────────────────── */
+.df-search-card {
+  background: var(--surface-secondary);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.df-search-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  background: linear-gradient(135deg, rgba(123, 110, 246, 0.2), transparent 60%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.df-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.df-input-row {
+  display: flex;
+  gap: 12px;
+}
+
+.df-input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.df-input-group label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #7b7e94;
+  font-weight: 600;
+}
+
+.df-input-group input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 0.92rem;
+  transition: border-color 0.2s;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.df-input-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.df-input-group input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Location row */
+.df-location-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(123, 110, 246, 0.06);
+  border-radius: 10px;
+  border: 1px solid rgba(123, 110, 246, 0.12);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.df-location-row.is-editing {
+  background: rgba(123, 110, 246, 0.12);
+  border-color: rgba(123, 110, 246, 0.28);
+  box-shadow: 0 0 0 1px rgba(123, 110, 246, 0.14);
+}
+
+.df-location-row.is-manual {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.22);
+}
+
+.df-gps-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+.df-gps-dot.detecting {
+  background: #eab308;
+  animation: df-pulse 1s ease-in-out infinite;
+}
+
+.df-gps-dot.error {
+  background: #ef4444;
+}
+
+@keyframes df-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+.df-location-text {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.df-location-text strong {
+  color: var(--text);
+}
+
+.df-location-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-size: 0.88rem;
+  outline: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.df-location-input::placeholder {
+  color: var(--text-muted);
+}
+
+.df-location-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 106, 61, 0.14);
+  background: var(--white);
+}
+
+.df-location-edit-btn {
+  background: none;
+  border: none;
+  color: #7b6ef6;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 8px;
+}
+
+.df-location-edit-btn:hover {
+  text-decoration: underline;
+}
+
+/* Autocomplete */
+.df-autocomplete-wrapper {
+  position: relative;
+}
+
+.df-autocomplete-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1a1b2e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 20;
+  margin-top: 4px;
+}
+
+.df-autocomplete-item {
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: #c4c6d8;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.df-autocomplete-item:hover {
+  background: rgba(123, 110, 246, 0.1);
+  color: #fff;
+}
+
+/* Search button */
+.df-search-btn {
+  background: linear-gradient(135deg, #7b6ef6, #6358d4);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.01em;
+}
+
+.df-search-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(123, 110, 246, 0.35);
+}
+
+.df-search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── Results Meta ────────────────────────────────────────── */
+.df-results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.df-results-header h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.df-results-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.df-results-meta span strong {
+  color: var(--text);
+}
+
+/* ─── Results Grid ────────────────────────────────────────── */
+.df-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+/* ─── Result Card ─────────────────────────────────────────── */
+.df-card {
+  background: var(--surface-soft);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.25s ease;
+  animation: df-card-in 0.35s ease both;
+  box-shadow: var(--shadow-sm);
+  cursor: default;
+}
+
+.df-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-float);
+}
+
+@keyframes df-card-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.df-card:nth-child(1) { animation-delay: 0s; }
+.df-card:nth-child(2) { animation-delay: 0.04s; }
+.df-card:nth-child(3) { animation-delay: 0.08s; }
+.df-card:nth-child(4) { animation-delay: 0.12s; }
+.df-card:nth-child(5) { animation-delay: 0.16s; }
+.df-card:nth-child(6) { animation-delay: 0.2s; }
+
+/* Card top line */
+.df-card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.df-card-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.df-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.df-badge.live {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.df-badge.closed {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.df-badge.trending {
+  background: rgba(234, 179, 8, 0.1);
+  color: #eab308;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.df-badge.rank {
+  background: rgba(123, 110, 246, 0.1);
+  color: #a5a0f6;
+  border: 1px solid rgba(123, 110, 246, 0.2);
+}
+
+.df-card-confidence {
+  font-size: 0.72rem;
+  color: #7b7e94;
+}
+
+/* Card main row */
+.df-card-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.df-card-main h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  flex: 1;
+}
+
+.df-price-block {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.df-price-original {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.df-price-final {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #22c55e;
+}
+
+/* Card details */
+.df-card-details {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.df-card-details span {
+  margin-right: 12px;
+}
+
+/* Coupon badge */
+.df-coupon-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(34, 197, 94, 0.06);
+  border: 1px solid rgba(34, 197, 94, 0.12);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.df-coupon-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.df-coupon-codes {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #22c55e;
+}
+
+.df-coupon-savings {
+  font-size: 0.78rem;
+  color: #4ade80;
+  margin-left: auto;
+}
+
+/* Coupon expand */
+.df-coupon-expand-btn {
+  background: none;
+  border: none;
+  color: #7b6ef6;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 4px 0;
+  font-weight: 600;
+}
+
+.df-coupon-expand-btn:hover {
+  text-decoration: underline;
+}
+
+.df-coupon-details {
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.df-coupon-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 0.78rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.df-coupon-option:last-child {
+  border-bottom: none;
+}
+
+.df-coupon-option-codes {
+  color: #b0b3c6;
+  font-weight: 600;
+}
+
+.df-coupon-option-price {
+  color: #4ade80;
+  font-weight: 700;
+}
+
+/* Selected card */
+.df-card.selected {
+  border-color: var(--primary);
+  box-shadow: 0 18px 45px rgba(79, 70, 229, 0.12);
+}
+
+/* Detail panel */
+.df-detail-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 24px;
+  max-width: 100%;
+  min-height: 240px;
+}
+
+.df-location-warning {
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.18);
+  color: #b91c1c;
+  padding: 14px 18px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  font-size: 0.92rem;
+}
+
+.df-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.df-detail-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--primary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.df-detail-subtitle {
+  color: var(--text-secondary);
+  margin: 8px 0 0;
+  font-size: 0.92rem;
+}
+
+.df-detail-price-block {
+  text-align: right;
+  min-width: 160px;
+}
+
+.df-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.df-detail-body {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.df-detail-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.df-detail-coupons {
+  background: rgba(34, 197, 94, 0.06);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.df-detail-coupons h4 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+
+.df-detail-coupons ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+}
+
+.df-detail-coupons ul li {
+  margin-bottom: 8px;
+}
+
+.df-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.df-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.df-order-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #e23744, #d42e3f);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.df-order-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(226, 55, 68, 0.3);
+}
+
+.df-copy-btn {
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.df-copy-btn:hover {
+  background: var(--surface-muted);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ─── Empty & Loading ─────────────────────────────────────── */
+.df-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #555770;
+}
+
+.df-empty h3 {
+  font-size: 1.1rem;
+  color: #8a8da3;
+  margin-bottom: 8px;
+}
+
+.df-empty p {
+  font-size: 0.88rem;
+}
+
+.df-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.df-skeleton-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 20px;
+  height: 200px;
+  animation: df-shimmer 1.5s ease infinite alternate;
+}
+
+@keyframes df-shimmer {
+  from { opacity: 0.4; }
+  to { opacity: 0.7; }
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .df-hero h2 {
+    font-size: 1.45rem;
+  }
+
+  .df-input-row {
+    flex-direction: column;
+  }
+
+  .df-search-card {
+    padding: 20px;
+  }
+
+  .df-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .df-results-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ─── Dead CSS removed: special offers carousel is no longer used ─── */
+
+/* ─── Section Dividers (Live / Tracking) ────────────────────── */
+.df-section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 28px 0 12px;
+}
+
+.df-section-label small {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.df-section-label-muted {
+  margin-top: 36px;
+  opacity: 0.8;
+}
+
+/* Tracking-only card: slightly dimmed */
+.df-card-tracking {
+  opacity: 0.82;
+}
+
+.df-card-tracking:hover {
+  opacity: 1;
+}
+
+/* ─── Badge: Tracking / Trend ──────────────────────────────── */
+.df-badge.offline {
+  background: rgba(148, 163, 184, 0.1);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.df-badge.trend {
+  background: rgba(234, 179, 8, 0.1);
+  color: #eab308;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+/* ─── Cart button states ───────────────────────────────────── */
+.df-order-btn.df-btn-success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.df-order-btn.df-btn-error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.df-order-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─── Manual location tag ──────────────────────────────────── */
+.df-manual-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ─── Live Zomato coupon tag ───────────────────────────────── */
+.df-coupon-live-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 4px;
+}
+
+/* ─── Card-level fields that were missing ──────────────────── */
+.df-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 2px;
+}
+
+.df-card-dish {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+
+.df-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.df-card-coupons {
+  margin-bottom: 10px;
+}
+
+.df-coupon-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.18);
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+  width: 100%;
+  color: #4ade80;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.df-coupon-toggle:hover {
+  background: rgba(34, 197, 94, 0.14);
+}
+
+.df-coupon-code {
+  flex: 1;
+}
+
+.df-coupon-item {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.df-coupon-item:last-child {
+  border-bottom: none;
+}
+
+.df-card-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.df-price-current {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #22c55e;
+}
+
+.df-order-unavailable {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.df-detail-coupons.muted {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.06);
+  color: var(--text-secondary);
+}
+
+.df-special-offers {
+  margin: 40px 0;
+}
+
+.df-offers-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.df-offers-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.df-offers-header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.df-offers-carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.df-offers-track {
+  display: flex;
+  gap: 16px;
+  animation: df-offers-slide 30s linear infinite;
+  width: calc(200px * 12 + 16px * 11); /* 6 offers * 2 sets * 200px width + gaps */
+}
+
+.df-offer-card {
+  flex: 0 0 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.df-offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.df-offer-image {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+}
+
+.df-offer-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.df-offer-card:hover .df-offer-image img {
+  transform: scale(1.05);
+}
+
+.df-offer-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--primary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.df-offer-content {
+  padding: 12px;
+}
+
+.df-offer-content h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.df-offer-dish {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.df-offer-pricing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.df-offer-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.df-offer-original {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.df-offer-discount {
+  font-size: 0.7rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+@keyframes df-offers-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 8px)); /* Move by half the width plus gap */
+  }
+}
+
+/* Pause animation on hover */
+.df-offers-carousel:hover .df-offers-track {
+  animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .df-offers-track {
+    width: calc(180px * 12 + 12px * 11);
+  }
+
+  .df-offer-card {
+    flex: 0 0 180px;
+  }
+
+  .df-offer-image {
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .df-offers-track {
+    width: calc(160px * 12 + 10px * 11);
+    gap: 10px;
+  }
+
+  .df-offer-card {
+    flex: 0 0 160px;
+  }
+
+  .df-offer-image {
+    height: 90px;
+  }
+
+  .df-offer-content {
+    padding: 10px;
+  }
+}
